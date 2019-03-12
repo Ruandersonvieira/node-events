@@ -1,3 +1,14 @@
+const axios = require('axios');
+
+baseUrl = 'http://127.0.0.1:8007'
+axios.get(baseUrl, {})
+        .then(response => {
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+
 
 function getRandomTime() {
     let min = 30000;
