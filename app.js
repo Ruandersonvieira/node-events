@@ -6,5 +6,10 @@ function getRandomTime() {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
  };
- 
-console.log( getRandomTime());
+
+
+function executeEvent(time){
+    setTimeout(function(){ console.log(time); }, time);
+}
+
+setInterval(function(){executeEvent(getRandomTime()); }, 1000);
