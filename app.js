@@ -1,9 +1,17 @@
 const axios = require('axios');
+let newData = [];
 
-baseUrl = 'http://127.0.0.1:8007'
+baseUrl = 'http://127.0.0.1:8007';
 axios.get(baseUrl, {})
         .then(response => {
-            console.log(response)
+            if(response.data){
+                for(i=0; i < response.data.length; i++){
+                    if(response.data[i].status=="Inativo"){
+                        newData.push(response.data[i]);
+                    }
+                }
+                console.log(newData);
+            };
         })
         .catch(error => {
             console.log(error)
