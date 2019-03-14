@@ -33,12 +33,12 @@ redisClient.auth('XUBIIoEhmZiHwhwq81LIbn3C6Tw0hzo8', function (err, reply){});
 function redisSave(docs) {
     redisClient.set("carinativo", JSON.stringify(docs), function (err, result) {
       if (err) return console.log(err);
-        redisClient.get("carinativo", function (err, result) {
-          if (err) { return console.log(err) };
-          console.log(result);
+         if(result == "OK"){
+             console.log("passo 1")
+            executeEvent(getRandomTime());
+         };
         });
-    });
-};
+    };
 
 function getRandomTime() {
     let min = 30000;
@@ -48,9 +48,11 @@ function getRandomTime() {
     return Math.floor(Math.random() * (max - min)) + min;
 };
 
-
 function executeEvent(time){
-    setTimeout(function(){ console.log(time); }, time);
+    setTimeout(function(){ 
+        console.log(time); 
+        executeEvent(getRandomTime());
+    }, time);
+
 }
 
-setInterval(function(){executeEvent(getRandomTime()); }, 1000);
