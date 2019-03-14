@@ -2,7 +2,10 @@ const axios = require('axios');
 let newData = [];
 
 baseUrl = 'http://127.0.0.1:8007';
-axios.get(baseUrl, {})
+
+getStatusoff();
+function getStatusoff(){
+    axios.get(baseUrl, {})
         .then(response => {
             if(response.data){
                 for(i=0; i < response.data.length; i++){
@@ -16,7 +19,7 @@ axios.get(baseUrl, {})
         .catch(error => {
             console.log(error)
         })
-
+}
 
 function getRandomTime() {
     let min = 30000;
