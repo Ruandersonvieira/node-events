@@ -1,8 +1,16 @@
 const axios = require('axios');
 const redis = require('redis');
+let events = require('events');
+let eventEmitter = new events.EventEmitter();
+
+let updateCrash = function ()
+{
+  console.log('Update Crash Status');
+}
+
+eventEmitter.on('update', updateCrash);
+
 let newData = [];
-
-
 
 
 baseUrl = 'http://127.0.0.1:8007';
@@ -51,6 +59,7 @@ function getRandomTime() {
 function executeEvent(time){
     setTimeout(function(){ 
         console.log(time); 
+        eventEmitter.emit('update');
         executeEvent(getRandomTime());
     }, time);
 
