@@ -23,7 +23,7 @@ function getStatusoff(){
                         newData.push(response.data[i]);
                     };
                 };
-                if(newData[0] == null){
+                if(!newData.length){
                     return console.log("Todos carros Ativos!");
                 } else{
                 redisSave(newData);
@@ -71,17 +71,22 @@ function executeEvent(time){
 
 // Update event
 let updateCrash = function (){
-    axios.put(baseUrl + newData[0]._id,{
-        name: newData[0].name,
+
+    if(!newData.length){
+        return console.log("Todos os carros ativos");
+    }
+    let aux = newData.shift();
+    console.log(aux);
+    axios.put(baseUrl + aux._id,{
+        name: aux.name,
         status: "Ativo"
     })
         .then(response => {
             console.log(response.data);
-            getStatusoff();
         })
         .catch(error => {
             console.log(error)
         })
-    console.log('Update Crash' + newData[0]._id +' Status');
+    console.log('Update Crash' + aux._id +' Status');
   };
   eventEmitter.on('update', updateCrash);
